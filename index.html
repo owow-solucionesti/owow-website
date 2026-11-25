@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OWOW | Soluciones TI — GNU/Linux, Hardening & Automatización</title>
+  <meta name="description" content="Consultoría empresarial en GNU/Linux, hardening con OpenSCAP, rescate de sistemas, automatización e infraestructura Open Source en Chile.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Descomenta la siguiente línea cuando tengas tu Site Key de Cloudflare Turnstile -->
+  <!-- <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script> -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            owow: {
+              bg: '#0D192B',
+              surface: '#132238',
+              border: '#1E3352',
+              cyan: '#00A8E8',
+              yellow: '#FACC15',
+              pink: '#F48FB1'
+            }
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #0D192B;
+      color: #F8FAFC;
+    }
+    .grid-bg {
+      background-image: radial-gradient(rgba(0, 168, 232, 0.12) 1px, transparent 1px);
+      background-size: 28px 28px;
+    }
+  </style>
+</head>
+<body class="antialiased selection:bg-owow-cyan selection:text-owow-bg">
+
+  <!-- NAVBAR (Fondo sólido #0D192B para fundir owow-logo.jpg sin bordes visibles) -->
+  <nav class="sticky top-0 z-50 bg-[#0D192B] border-b border-owow-border">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <a href="#" class="flex items-center focus:outline-none">
+        <img src="./owow-logo.jpg" alt="OWOW Soluciones TI" class="h-12 md:h-14 w-auto object-contain">
+      </a>
+
+      <div class="hidden md:flex items-center space-x-8 text-sm font-medium text-slate-300">
+        <a href="#servicios" class="hover:text-owow-cyan transition-colors">Servicios</a>
+        <a href="#enfoque" class="hover:text-owow-cyan transition-colors">Enfoque Técnico</a>
+        <a href="#metodologia" class="hover:text-owow-cyan transition-colors">Metodología</a>
+        <a href="#contacto" class="px-4 py-2 rounded-lg bg-owow-cyan text-owow-bg font-semibold hover:bg-sky-400 transition-colors">
+          Cotizar Consultoría
+        </a>
+      </div>
+
+      <a href="#contacto" class="md:hidden px-3.5 py-2 rounded-lg bg-owow-cyan text-owow-bg text-xs font-semibold">
+        Contacto
+      </a>
+    </div>
+  </nav>
+
+  <!-- HERO SECTION -->
+  <header class="relative overflow-hidden grid-bg border-b border-owow-border">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-28">
+      <div class="grid lg:grid-cols-12 gap-12 items-center">
+        <div class="lg:col-span-7 space-y-6">
+          <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-owow-surface border border-owow-border text-xs font-mono text-owow-cyan">
+            <span class="w-2 h-2 rounded-full bg-owow-yellow animate-pulse"></span>
+            Consultoría GNU/Linux, Seguridad &amp; Open Source
+          </div>
+
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-tight text-white">
+            De la emergencia crítica al <span class="text-owow-cyan">control operativo total</span>.
+          </h1>
+
+          <p class="text-lg text-slate-300 max-w-2xl leading-relaxed">
+            Aseguramos, rescatamos y automatizamos infraestructuras empresariales sobre <strong class="text-white font-semibold">GNU/Linux</strong>. Hardening bajo estándares internacionales con OpenSCAP, recuperación de acceso sin pérdida de datos y observabilidad continua.
+          </p>
+
+          <div class="flex flex-wrap gap-4 pt-2">
+            <a href="#contacto" class="px-6 py-3.5 rounded-lg bg-owow-cyan text-owow-bg font-semibold hover:bg-sky-400 transition-all shadow-lg shadow-sky-500/20">
+              Solicitar Diagnóstico
+            </a>
+            <a href="#servicios" class="px-6 py-3.5 rounded-lg bg-owow-surface border border-owow-border text-slate-200 font-medium hover:border-owow-cyan/50 transition-all">
+              Explorar Soluciones
+            </a>
+          </div>
+
+          <div class="pt-4 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs font-mono text-slate-400">
+            <span>[✓] RHEL / Debian / SLES / AlmaLinux</span>
+            <span>[✓] OpenSCAP &amp; CIS Benchmarks</span>
+            <span>[✓] Ansible &amp; Stack Open Source</span>
+          </div>
+        </div>
+
+        <!-- TERMINAL INTERACTIVA -->
+        <div class="lg:col-span-5">
+          <div class="rounded-xl bg-[#08101C] border border-owow-border shadow-2xl overflow-hidden">
+            <div class="px-4 py-3 bg-owow-surface border-b border-owow-border flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <span class="w-3 h-3 rounded-full bg-rose-500/80"></span>
+                <span class="w-3 h-3 rounded-full bg-owow-yellow/80"></span>
+                <span class="w-3 h-3 rounded-full bg-emerald-500/80"></span>
+              </div>
+              <div class="flex gap-1 text-[11px] font-mono">
+                <button type="button" onclick="setTerminalTab('openscap')" id="tab-openscap" class="px-2.5 py-1 rounded bg-owow-cyan/20 text-owow-cyan border border-owow-cyan/40">OpenSCAP</button>
+                <button type="button" onclick="setTerminalTab('rescate')" id="tab-rescate" class="px-2.5 py-1 rounded text-slate-400 hover:text-white">Rescate</button>
+                <button type="button" onclick="setTerminalTab('ansible')" id="tab-ansible" class="px-2.5 py-1 rounded text-slate-400 hover:text-white">Ansible</button>
+              </div>
+            </div>
+            <div id="terminal-body" class="p-5 font-mono text-xs sm:text-sm leading-relaxed text-slate-300 space-y-2 min-h-[270px]">
+              <p class="text-owow-cyan">$ oscap xccdf eval --profile xccdf_org.ssgproject.content_profile_cis \</p>
+              <p class="text-slate-400 pl-4">--report /var/www/audit/hardening-report.html /usr/share/xml/scap/ssg/content/ssg-rhel9-ds.xml</p>
+              <p class="text-slate-400 pt-1">Title   Ensure SSH root login is disabled</p>
+              <p class="text-slate-400">Rule    xccdf_org.ssgproject.content_rule_sshd_disable_root_login</p>
+              <p class="text-emerald-400">Result  pass</p>
+              <p class="text-slate-400 pt-1">Title   Verify firewalld active &amp; default zone drop</p>
+              <p class="text-emerald-400">Result  pass</p>
+              <p class="text-owow-yellow pt-2">[OK] Remediación completada: 98.4% cumplimiento CIS Level 2.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- SERVICIOS -->
+  <section id="servicios" class="py-20 lg:py-24 border-b border-owow-border">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mb-14">
+        <p class="font-mono text-xs uppercase tracking-widest text-owow-cyan mb-2">Catálogo de Ingeniería</p>
+        <h2 class="text-3xl sm:text-4xl font-bold text-white">Soluciones diseñadas para entornos productivos</h2>
+        <p class="mt-4 text-slate-300">Intervenciones precisas, auditables y documentadas para mantener tus servidores seguros, rápidos y libres de sorpresas.</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Servicio 1 -->
+        <div class="p-6 rounded-xl bg-owow-surface border border-owow-border hover:border-owow-cyan/60 transition-all flex flex-col justify-between">
+          <div>
+            <div class="w-11 h-11 rounded-lg bg-owow-bg border border-owow-border flex items-center justify-center text-owow-cyan font-mono font-bold mb-5">
+              01
+            </div>
+            <h3 class="text-xl font-semibold text-white mb-3">Hardening &amp; Cumplimiento con OpenSCAP</h3>
+            <p class="text-sm text-slate-300 leading-relaxed mb-4">
+              Auditoría automatizada, remediación de vulnerabilidades y endurecimiento de servidores GNU/Linux según perfiles <strong class="text-white">CIS Benchmarks, PCI-DSS y DISA STIG</strong> con reportes ejecutivos y técnicos.
+            </p>
+          </div>
+          <div class="pt-4 border-t border-owow-border/70 font-mono text-xs text-owow-cyan">
+            oscap • SELinux • Firewalld • Auditoría
+          </div>
+        </div>
+
+        <!-- Servicio 2 -->
+        <div class="p-6 rounded-xl bg-owow-surface border border-owow-border hover:border-owow-yellow/60 transition-all flex flex-col justify-between">
+          <div>
+            <div class="w-11 h-11 rounded-lg bg-owow-bg border border-owow-border flex items-center justify-center text-owow-yellow font-mono font-bold mb-5">
+              02
+            </div>
+            <h3 class="text-xl font-semibold text-white mb-3">Recuperación de Acceso y Rescate Linux</h3>
+            <p class="text-sm text-slate-300 leading-relaxed mb-4">
+              Restablecimiento controlado de credenciales <code class="text-owow-yellow">root</code> y cuentas administrativas en múltiples distribuciones GNU/Linux sin pérdida de información, además de reparación de <strong class="text-white">GRUB2, initramfs, LVM y sistemas de archivos</strong>.
+            </p>
+          </div>
+          <div class="pt-4 border-t border-owow-border/70 font-mono text-xs text-owow-yellow">
+            RHEL • Debian • Ubuntu • SUSE • Emergency Mode
+          </div>
+        </div>
+
+        <!-- Servicio 3 -->
+        <div class="p-6 rounded-xl bg-owow-surface border border-owow-border hover:border-owow-cyan/60 transition-all flex flex-col justify-between">
+          <div>
+            <div class="w-11 h-11 rounded-lg bg-owow-bg border border-owow-border flex items-center justify-center text-owow-cyan font-mono font-bold mb-5">
+              03
+            </div>
+            <h3 class="text-xl font-semibold text-white mb-3">Administración &amp; Automatización de SO</h3>
+            <p class="text-sm text-slate-300 leading-relaxed mb-4">
+              Eliminación de tareas manuales repetitivas mediante <strong class="text-white">Ansible, Bash y systemd</strong>. Aprovisionamiento estandarizado, gestión de parches, tuning de rendimiento y alta disponibilidad.
+            </p>
+          </div>
+          <div class="pt-4 border-t border-owow-border/70 font-mono text-xs text-owow-cyan">
+            Ansible • IaC • Systemd • Patch Management
+          </div>
+        </div>
+
+        <!-- Servicio 4 -->
+        <div class="p-6 rounded-xl bg-owow-surface border border-owow-border hover:border-owow-cyan/60 transition-all flex flex-col justify-between">
+          <div>
+            <div class="w-11 h-11 rounded-lg bg-owow-bg border border-owow-border flex items-center justify-center text-owow-cyan font-mono font-bold mb-5">
+              04
+            </div>
+            <h3 class="text-xl font-semibold text-white mb-3">Observabilidad y Monitoreo 24/7</h3>
+            <p class="text-sm text-slate-300 leading-relaxed mb-4">
+              Visibilidad en tiempo real de métricas, servicios, logs y capacidad para detectar anomalías antes de que impacten la continuidad del negocio, con alertas inteligentes integradas a tus canales operativos.
+            </p>
+          </div>
+          <div class="pt-4 border-t border-owow-border/70 font-mono text-xs text-owow-cyan">
+            Zabbix • Prometheus • Grafana • Loki
+          </div>
+        </div>
+
+        <!-- Servicio 5 -->
+        <div class="p-6 rounded-xl bg-owow-surface border border-owow-border hover:border-owow-cyan/60 transition-all flex flex-col justify-between md:col-span-2 lg:col-span-2">
+          <div>
+            <div class="w-11 h-11 rounded-lg bg-owow-bg border border-owow-border flex items-center justify-center text-owow-cyan font-mono font-bold mb-5">
+              05
+            </div>
+            <h3 class="text-xl font-semibold text-white mb-3">Arquitectura y Soluciones Open Source</h3>
+            <p class="text-sm text-slate-300 leading-relaxed mb-4">
+              Diseño e implementación de plataformas empresariales basadas en software libre sin dependencia de licenciamientos abusivos: contenedores, proxies inversos, DNS seguro, gestión documental y automatización de flujos internos.
+            </p>
+          </div>
+          <div class="pt-4 border-t border-owow-border/70 font-mono text-xs text-owow-cyan">
+            Podman / Docker • Nginx • GitOps • Cero Vendor Lock-in
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ENFOQUE TÉCNICO -->
+  <section id="enfoque" class="py-20 border-b border-owow-border bg-[#0A1423]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div class="space-y-5">
+          <p class="font-mono text-xs uppercase tracking-widest text-owow-yellow">Filosofía OWOW</p>
+          <h2 class="text-3xl font-bold text-white">Cero cajas negras. Todo queda documentado y bajo tu control.</h2>
+          <p class="text-slate-300 leading-relaxed">
+            Cuando ocurre un incidente crítico o una auditoría de seguridad, lo último que tu equipo necesita son improvisaciones. Trabajamos con estándares abiertos, playbooks reproducibles y entrega formal de procedimientos para que tu área TI mantenga autonomía total.
+          </p>
+        </div>
+
+        <div class="grid sm:grid-cols-2 gap-4">
+          <div class="p-5 rounded-xl bg-owow-surface border border-owow-border">
+            <h4 class="font-semibold text-white mb-1">Evidencia Auditable</h4>
+            <p class="text-xs text-slate-300 leading-relaxed">Reportes antes y después de cada intervención OpenSCAP o cambio de configuración.</p>
+          </div>
+          <div class="p-5 rounded-xl bg-owow-surface border border-owow-border">
+            <h4 class="font-semibold text-white mb-1">Idempotencia</h4>
+            <p class="text-xs text-slate-300 leading-relaxed">Automatizaciones en Ansible diseñadas para ejecutarse de forma segura y repetible.</p>
+          </div>
+          <div class="p-5 rounded-xl bg-owow-surface border border-owow-border">
+            <h4 class="font-semibold text-white mb-1">Seguridad por Defecto</h4>
+            <p class="text-xs text-slate-300 leading-relaxed">Principio de mínimo privilegio, llaves SSH, SELinux activo y segmentación de red.</p>
+          </div>
+          <div class="p-5 rounded-xl bg-owow-surface border border-owow-border">
+            <h4 class="font-semibold text-white mb-1">Soberanía Tecnológica</h4>
+            <p class="text-xs text-slate-300 leading-relaxed">Stack Open Source maduro, respaldado por comunidad empresarial y sin costos ocultos.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- METODOLOGÍA -->
+  <section id="metodologia" class="py-20 border-b border-owow-border">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-14">
+        <p class="font-mono text-xs uppercase tracking-widest text-owow-cyan mb-2">Flujo de Trabajo</p>
+        <h2 class="text-3xl font-bold text-white">Cómo abordamos cada proyecto</h2>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="p-6 rounded-xl bg-owow-surface border border-owow-border">
+          <span class="font-mono text-xs text-owow-cyan">FASE 01</span>
+          <h3 class="text-lg font-semibold text-white mt-2 mb-2">Levantamiento</h3>
+          <p class="text-sm text-slate-300">Evaluación de arquitectura, criticidad de servicios y riesgos inmediatos.</p>
+        </div>
+        <div class="p-6 rounded-xl bg-owow-surface border border-owow-border">
+          <span class="font-mono text-xs text-owow-cyan">FASE 02</span>
+          <h3 class="text-lg font-semibold text-white mt-2 mb-2">Plan &amp; Hardening</h3>
+          <p class="text-sm text-slate-300">Definición de línea base, pruebas en entorno controlado y ventana de cambio.</p>
+        </div>
+        <div class="p-6 rounded-xl bg-owow-surface border border-owow-border">
+          <span class="font-mono text-xs text-owow-cyan">FASE 03</span>
+          <h3 class="text-lg font-semibold text-white mt-2 mb-2">Automatización</h3>
+          <p class="text-sm text-slate-300">Despliegue mediante código y conexión a tableros de observabilidad.</p>
+        </div>
+        <div class="p-6 rounded-xl bg-owow-surface border border-owow-border">
+          <span class="font-mono text-xs text-owow-cyan">FASE 04</span>
+          <h3 class="text-lg font-semibold text-white mt-2 mb-2">Entrega &amp; Runbooks</h3>
+          <p class="text-sm text-slate-300">Documentación técnica completa y transferencia operativa a tu equipo.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACTO CON PROTECCIÓN ANTI-BOT -->
+  <section id="contacto" class="py-20 lg:py-24">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="rounded-2xl bg-owow-surface border border-owow-border p-8 sm:p-10 shadow-2xl">
+        <div class="max-w-2xl mb-8">
+          <p class="font-mono text-xs uppercase tracking-widest text-owow-cyan mb-2">Contacto Directo</p>
+          <h2 class="text-3xl font-bold text-white">Hablemos de tu infraestructura</h2>
+          <p class="mt-2 text-sm text-slate-300">
+            Cuéntanos qué distribución o desafío necesitas resolver. También puedes escribirnos directo a <a href="mailto:contacto@owow.cl" class="text-owow-cyan underline hover:text-sky-300">contacto@owow.cl</a>.
+          </p>
+        </div>
+
+        <form id="contact-form" action="https://api.web3forms.com/submit" method="POST" class="space-y-5">
+          <!-- Reemplaza TU_ACCESS_KEY_WEB3FORMS con tu clave gratuita de web3forms.com -->
+          <input type="hidden" name="access_key" value="TU_ACCESS_KEY_WEB3FORMS">
+          <input type="hidden" name="subject" value="Nueva consulta desde owow.cl">
+          <input type="hidden" name="from_name" value="OWOW Soluciones TI Web">
+
+          <!-- Honeypot Anti-Spam invisible para humanos -->
+          <input type="checkbox" name="botcheck" id="botcheck" class="hidden" style="display:none;">
+
+          <div class="grid sm:grid-cols-2 gap-5">
+            <div>
+              <label for="name" class="block text-xs font-mono uppercase text-slate-300 mb-2">Nombre / Cargo</label>
+              <input type="text" id="name" name="name" required placeholder="Ej. Carlos Méndez — Jefe TI"
+                class="w-full px-4 py-3 rounded-lg bg-owow-bg border border-owow-border text-white placeholder-slate-500 focus:outline-none focus:border-owow-cyan">
+            </div>
+            <div>
+              <label for="email" class="block text-xs font-mono uppercase text-slate-300 mb-2">Correo Corporativo</label>
+              <input type="email" id="email" name="email" required placeholder="nombre@empresa.cl"
+                class="w-full px-4 py-3 rounded-lg bg-owow-bg border border-owow-border text-white placeholder-slate-500 focus:outline-none focus:border-owow-cyan">
+            </div>
+          </div>
+
+          <div class="grid sm:grid-cols-2 gap-5">
+            <div>
+              <label for="service" class="block text-xs font-mono uppercase text-slate-300 mb-2">Área de Interés</label>
+              <select id="service" name="service"
+                class="w-full px-4 py-3 rounded-lg bg-owow-bg border border-owow-border text-white focus:outline-none focus:border-owow-cyan">
+                <option value="Hardening OpenSCAP">Hardening y Auditoría OpenSCAP</option>
+                <option value="Rescate GNU/Linux">Recuperación de Acceso / Rescate Linux</option>
+                <option value="Automatización Ansible">Administración y Automatización (Ansible)</option>
+                <option value="Observabilidad">Observabilidad y Monitoreo 24/7</option>
+                <option value="Arquitectura Open Source">Arquitectura Open Source</option>
+              </select>
+            </div>
+            <div>
+              <label for="distro" class="block text-xs font-mono uppercase text-slate-300 mb-2">Entorno / Distro (Opcional)</label>
+              <input type="text" id="distro" name="distro" placeholder="Ej. RHEL 8/9, Debian 12, Proxmox..."
+                class="w-full px-4 py-3 rounded-lg bg-owow-bg border border-owow-border text-white placeholder-slate-500 focus:outline-none focus:border-owow-cyan">
+            </div>
+          </div>
+
+          <div>
+            <label for="message" class="block text-xs font-mono uppercase text-slate-300 mb-2">Detalle del Requerimiento</label>
+            <textarea id="message" name="message" rows="4" required placeholder="Describe brevemente tu infraestructura, cantidad aproximada de servidores o urgencia..."
+              class="w-full px-4 py-3 rounded-lg bg-owow-bg border border-owow-border text-white placeholder-slate-500 focus:outline-none focus:border-owow-cyan"></textarea>
+          </div>
+
+          <!-- CAPTCHA ANTI-BOT ACTIVO + CLOUDFLARE TURNSTILE -->
+          <div class="p-4 rounded-xl bg-owow-bg border border-owow-border flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div>
+              <label for="captcha-answer" class="block text-xs font-mono text-owow-cyan mb-1">
+                Verificación Humana: <span id="captcha-question" class="text-white font-bold">Cargando desafío...</span>
+              </label>
+              <p class="text-[11px] text-slate-400">Protección activa contra envíos automatizados.</p>
+            </div>
+            <div class="flex items-center gap-2">
+              <input type="number" id="captcha-answer" required placeholder="Resultado"
+                class="w-28 px-3 py-2 rounded-lg bg-owow-surface border border-owow-border text-white font-mono text-sm focus:outline-none focus:border-owow-cyan">
+              <button type="button" onclick="generateCaptcha()" title="Nuevo desafío"
+                class="px-3 py-2 rounded-lg bg-owow-surface border border-owow-border text-slate-300 hover:text-owow-cyan text-xs font-mono">
+                ↻
+              </button>
+            </div>
+          </div>
+
+          <!-- Widget oficial de Cloudflare Turnstile (descomentar al agregar tu Site Key) -->
+          <!-- <div class="cf-turnstile" data-sitekey="TU_SITE_KEY_DE_CLOUDFLARE_TURNSTILE" data-theme="dark"></div> -->
+
+          <div id="form-status" class="hidden text-sm font-mono p-3 rounded-lg"></div>
+
+          <button type="submit"
+            class="w-full sm:w-auto px-8 py-3.5 rounded-lg bg-owow-cyan text-owow-bg font-semibold hover:bg-sky-400 transition-colors">
+            Enviar Solicitud Segura
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER (Fondo sólido #0D192B para integrar owow-logo.jpg) -->
+  <footer class="bg-[#0D192B] border-t border-owow-border py-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-6">
+      <img src="./owow-logo.jpg" alt="OWOW Soluciones TI" class="h-10 w-auto object-contain">
+      <p class="text-xs font-mono text-slate-400 text-center sm:text-right">
+        &copy; <span id="year"></span> OWOW Soluciones TI — owow.cl • Chile
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Terminal interactiva en portada
+    const terminalOutputs = {
+      openscap: `
+        <p class="text-owow-cyan">$ oscap xccdf eval --profile xccdf_org.ssgproject.content_profile_cis \\</p>
+        <p class="text-slate-400 pl-4">--report /var/www/audit/hardening-report.html /usr/share/xml/scap/ssg/content/ssg-rhel9-ds.xml</p>
+        <p class="text-slate-400 pt-1">Title   Ensure SSH root login is disabled</p>
+        <p class="text-slate-400">Rule    xccdf_org.ssgproject.content_rule_sshd_disable_root_login</p>
+        <p class="text-emerald-400">Result  pass</p>
+        <p class="text-slate-400 pt-1">Title   Verify firewalld active &amp; default zone drop</p>
+        <p class="text-emerald-400">Result  pass</p>
+        <p class="text-owow-yellow pt-2">[OK] Remediación completada: 98.4% cumplimiento CIS Level 2.</p>
+      `,
+      rescate: `
+        <p class="text-owow-cyan">grub&gt; linux /vmlinuz-5.14.0 root=/dev/mapper/rhel-root ro rd.break</p>
+        <p class="text-slate-400 pt-1">switch_root:/# mount -o remount,rw /sysroot</p>
+        <p class="text-slate-400">switch_root:/# chroot /sysroot</p>
+        <p class="text-slate-400">sh-5.1# passwd root</p>
+        <p class="text-emerald-400">passwd: all authentication tokens updated successfully.</p>
+        <p class="text-slate-400">sh-5.1# touch /.autorelabel &amp;&amp; exit</p>
+        <p class="text-owow-yellow pt-2">[OK] Acceso restaurado con contexto SELinux íntegro.</p>
+      `,
+      ansible: `
+        <p class="text-owow-cyan">$ ansible-playbook -i inventory/prod.ini hardening-baseline.yml</p>
+        <p class="text-slate-400 pt-1">TASK [Configure auditd &amp; journald persistent logging] ******************</p>
+        <p class="text-emerald-400">changed: [prod-db-01.owow.cl]</p>
+        <p class="text-emerald-400">changed: [prod-app-01.owow.cl]</p>
+        <p class="text-slate-400 pt-1">TASK [Deploy node_exporter &amp; zabbix-agent2] ****************************</p>
+        <p class="text-emerald-400">ok: [prod-db-01.owow.cl]</p>
+        <p class="text-owow-yellow pt-2">[OK] PLAY RECAP: ok=14 changed=4 unreachable=0 failed=0</p>
+      `
+    };
+
+    function setTerminalTab(tab) {
+      document.getElementById('terminal-body').innerHTML = terminalOutputs[tab];
+      ['openscap', 'rescate', 'ansible'].forEach(t => {
+        const btn = document.getElementById('tab-' + t);
+        if (t === tab) {
+          btn.className = 'px-2.5 py-1 rounded bg-owow-cyan/20 text-owow-cyan border border-owow-cyan/40';
+        } else {
+          btn.className = 'px-2.5 py-1 rounded text-slate-400 hover:text-white';
+        }
+      });
+    }
+
+    // Protección Anti-Bot (Captcha matemático + tiempo mínimo de llenado)
+    let expectedCaptcha = 0;
+    const pageLoadTime = Date.now();
+
+    function generateCaptcha() {
+      const a = Math.floor(Math.random() * 12) + 3;
+      const b = Math.floor(Math.random() * 9) + 2;
+      expectedCaptcha = a + b;
+      document.getElementById('captcha-question').textContent = `¿Cuánto es ${a} + ${b}?`;
+      document.getElementById('captcha-answer').value = '';
+    }
+    generateCaptcha();
+
+    document.getElementById('contact-form').addEventListener('submit', async function (e) {
+      e.preventDefault();
+      const statusBox = document.getElementById('form-status');
+      const botCheck = document.getElementById('botcheck').checked;
+      const userAnswer = parseInt(document.getElementById('captcha-answer').value, 10);
+      const elapsedSeconds = (Date.now() - pageLoadTime) / 1000;
+
+      if (botCheck || elapsedSeconds < 3) {
+        return;
+      }
+
+      if (userAnswer !== expectedCaptcha) {
+        statusBox.className = 'text-sm font-mono p-3 rounded-lg bg-rose-500/20 border border-rose-500/40 text-rose-300';
+        statusBox.textContent = '[ERROR] Respuesta de verificación incorrecta. Inténtalo nuevamente.';
+        statusBox.classList.remove('hidden');
+        generateCaptcha();
+        return;
+      }
+
+      const formData = new FormData(this);
+      if (formData.get('access_key') === 'TU_ACCESS_KEY_WEB3FORMS') {
+        statusBox.className = 'text-sm font-mono p-3 rounded-lg bg-owow-yellow/20 border border-owow-yellow/40 text-owow-yellow';
+        statusBox.textContent = '[DEMO] Verificación humana superada. Configura tu access_key de Web3Forms para activar el envío real.';
+        statusBox.classList.remove('hidden');
+        return;
+      }
+
+      try {
+        const res = await fetch(this.action, {
+          method: 'POST',
+          body: formData,
+          headers: { 'Accept': 'application/json' }
+        });
+        if (res.ok) {
+          statusBox.className = 'text-sm font-mono p-3 rounded-lg bg-emerald-500/20 border border-emerald-500/40 text-emerald-300';
+          statusBox.textContent = '[OK] Solicitud enviada correctamente. Te responderemos a la brevedad.';
+          statusBox.classList.remove('hidden');
+          this.reset();
+          generateCaptcha();
+        } else {
+          throw new Error('Error en el envío');
+        }
+      } catch (err) {
+        statusBox.className = 'text-sm font-mono p-3 rounded-lg bg-rose-500/20 border border-rose-500/40 text-rose-300';
+        statusBox.textContent = '[ERROR] No se pudo enviar el formulario. Escríbenos directo a contacto@owow.cl.';
+        statusBox.classList.remove('hidden');
+      }
+    });
+  </script>
+</body>
+</html>
